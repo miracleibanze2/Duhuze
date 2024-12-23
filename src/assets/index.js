@@ -12,6 +12,7 @@ import handWritting from "./images/hand writting.jpg";
 import electronics from "./images/electronics.jpg";
 
 import checkSvg from "./svgs/check.svg";
+import ArrowSvg from "./svgs/arrow-left.svg";
 
 export {
   logo,
@@ -26,4 +27,5 @@ export {
   handWritting,
   electronics,
   checkSvg,
+  ArrowSvg,
 };

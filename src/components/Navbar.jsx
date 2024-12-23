@@ -8,11 +8,14 @@ import {
 } from "../assets";
 import { AppContext } from "./AppContext";
 import MenuSvg from "../assets/svgs/MenuSvg";
-import { useNavigate } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 
 const Navbar = () => {
   const navigate = useNavigate();
-  const { en, setEn } = useContext(AppContext);
+  const context = useContext(AppContext);
+  const { pathname } = useLocation();
+  if (!context) return;
+  const { en, setEn } = context;
   const [chooseLang, setChooseLang] = useState(false);
   const [menu, setMenu] = useState(false);
   const handleLanguage = (text) => {
@@ -22,13 +25,13 @@ const Navbar = () => {
   };
 
   return (
-    <div className="sticky top-0 w-full flex-between-hor bg-white h-[4rem] shadow-md px-4 z-[999]">
+    <div className="sticky top-0 w-full flex-between-hor bg-white h-[3.5rem] shadow-md px-4 z-[999]">
       <img
         src={nameLogo}
         alt="logoName"
         height={300}
         width={1100}
-        className="h-12 w-auto"
+        className="h-10 w-auto"
         onClick={() => navigate("/")}
       />
       <div
@@ -40,7 +43,7 @@ const Navbar = () => {
       >
         <label
           htmlFor="language" // Links the label to the select
-          className="md:border border-blue-400 p-2 relative md:h-12 flex items-center md:flex-row flex-col h-max hover:bg-zinc-200 w-full"
+          className="md:border border-blue-400 p-2 relative md:h-10 flex items-center md:flex-row flex-col h-max hover:bg-zinc-200 w-full"
         >
           <span
             className="md:flex-center-hor flex-between-hor max-md:w-full gap-2"
@@ -54,15 +57,21 @@ const Navbar = () => {
           </span>
           {chooseLang && (
             <div className="absolute right-0 left-0 top-full flex-center-both z-[50] translate-y-1 px-2 py-4 bg-white list">
-              <span onClick={() => handleLanguage("true")}>
+              <span
+                onClick={() => handleLanguage("true")}
+                className={`${en && "bg-blue-200"}`}
+              >
                 {en ? (
                   <img src={checkSvg} alt="check" className="w-5" />
                 ) : (
-                  <span className="w-5" />
+                  <span className="max-w-5" />
                 )}
                 <span className="flex-1">English</span>
               </span>
-              <span onClick={() => handleLanguage("false")}>
+              <span
+                onClick={() => handleLanguage("false")}
+                className={`${!en && "bg-blue-200"}`}
+              >
                 {!en ? (
                   <img src={checkSvg} alt="check" className="w-5 h-5" />
                 ) : (
@@ -81,13 +90,21 @@ const Navbar = () => {
           height={700}
           className="w-full h-auto object-right object-fit md:hidden"
         />
-
-        <button
-          className="md:px-6 px-3 bg-blue-500 button text-white body-1 flex items-center flex-nowrap min-w-max h-12 text-center"
-          onClick={() => navigate("/browse")}
-        >
-          {en ? "Get Started" : "Tangira"}
-        </button>
+        {pathname === "/" ? (
+          <button
+            className="md:px-6 px-3 bg-blue-500 button text-white body-1 flex items-center flex-nowrap min-w-max h-10 text-center"
+            onClick={() => navigate("/browse/houses")}
+          >
+            {en ? "Get Started" : "Tangira"}
+          </button>
+        ) : (
+          <button
+            className="md:px-6 px-3 bg-blue-500 button text-white body-1 flex items-center flex-nowrap min-w-max h-10 text-center"
+            onClick={() => navigate("/browse/list")}
+          >
+            {en ? "List property" : "Andikisha"}
+          </button>
+        )}
       </div>
       <MenuSvg
         openNavigation={menu}

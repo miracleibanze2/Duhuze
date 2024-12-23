@@ -7,6 +7,7 @@ export const whatWeHaveCards = [
     enDescription: "Browse between verified house for your real estate plan.",
     description: "Shakisha mu mazu ubone ikubereye ku giciro wifuza.",
     image: house,
+    link: "houses",
   },
   {
     enName: "Land For sale .",
@@ -15,6 +16,7 @@ export const whatWeHaveCards = [
     description:
       "Turagufasha Kubona ahari Ubutaka bugurishwa kandi ku giciro wifuza.",
     image: land,
+    link: "land",
   },
   {
     enName: "Electronics for sale .",
@@ -24,6 +26,7 @@ export const whatWeHaveCards = [
     description:
       "Urabona ibicuruzwa by' ikoranabuhanga wifuza handi biguhendukiye.",
     image: electronics,
+    link: "electronics",
   },
   {
     enName: "List Your Property .",
@@ -31,6 +34,7 @@ export const whatWeHaveCards = [
     enDescription: "We help you find market for you property easily.",
     description: "Tugufasha kubona abaguzi b' umutungo wawe.",
     image: handWritting,
+    link: "list",
   },
 ];
 export const welcomeParts = [
@@ -41,22 +45,22 @@ export const welcomeParts = [
       {
         enWord: "Houses for Sale",
         word: "Amazu agurishwa",
+        link: "houses",
       },
       {
         enWord: "Land for Sale",
         word: "Ubutaka bugurishwa",
+        link: "land",
       },
       {
         enWord: "Electronics for Sale",
         word: "Ibikoresho bigurishwa",
+        link: "electronics",
       },
       {
         enWord: "List Your Property",
         word: "Tanga umutungo wawe",
-      },
-      {
-        enWord: "Property Advice",
-        word: "Shaka inama ku mitungo",
+        link: "list",
       },
     ],
   },

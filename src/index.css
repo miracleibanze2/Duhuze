@@ -187,4 +187,29 @@
     list-style-position: inside;
     font-size: 20px;
   }
+  @keyframes fadeIn {
+    0% {
+      opacity: 0;
+    }
+    100% {
+      opacity: 1;
+    }
+  }
+
+  @keyframes slideIn {
+    0% {
+      transform: translateX(100%);
+    }
+    100% {
+      transform: translateX(0);
+    }
+  }
+
+  .animate-fade-in {
+    animation: fadeIn 0.7s ease-in-out forwards;
+  }
+
+  .animate-slide-in {
+    animation: slideIn 0.7s ease-in-out forwards;
+  }
 }

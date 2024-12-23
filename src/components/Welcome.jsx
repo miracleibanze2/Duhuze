@@ -8,9 +8,11 @@ import {
   welcomeParts,
   whatWeHaveCards,
 } from "./constants";
+import { useNavigate } from "react-router-dom";
 
 const Welcome = () => {
   const { en } = useContext(AppContext);
+  const navigate = useNavigate();
 
   const sections = {
     whatWeOffer: useRef(null),
@@ -64,10 +66,13 @@ const Welcome = () => {
         <h5 className="h5 font-semibold leading-none mb-4 text-center">
           {en ? item.enName : item.name}
         </h5>
-        <p className="body-1 leading-none h-full text-center">
+        <p className="body-2 leading-none h-full text-center">
           {en ? item.enDescription : item.description}
         </p>
-        <button className="button text-white bg-blue-700 w-full py-2 mt-6">
+        <button
+          className="button text-white bg-blue-700 w-full py-2 mt-6"
+          onClick={() => navigate(`/browse/${item.link}`)}
+        >
           {en ? "Look Out" : "Menya byinshi"}
         </button>
       </div>
@@ -78,12 +83,12 @@ const Welcome = () => {
       className="w-full flex flex-col gap-3 min-h-[50vh] mt-12"
       key={title.en}
     >
-      <h4 className="h4" ref={ref}>
+      <h5 className="h5" ref={ref}>
         {en ? title.en : title.local}
-      </h4>
-      <ol className="pl-[1rem] list-decimal">
+      </h5>
+      <ol className="pl-[1rem] body-2 font-normal list-decimal">
         {steps.map((step, idx) => (
-          <li className="mb-4" key={idx}>
+          <li className="mb-4 text-zinc-700" key={idx}>
             <span className="font-semibold">
               {en ? step.enHeading : step.localHeading}
             </span>{" "}
@@ -137,8 +142,8 @@ const Welcome = () => {
         <div className="h-full sticky top-[5rem] hidden lg:flex-center-both">
           {welcomeParts.map((item, index) => (
             <div className="w-full flex-center-both" key={index}>
-              <h3
-                className="h4 h-full font-normal flex-center-both gap-2 w-[18rem] p-2"
+              <p
+                className="body-1 h-full font-normal flex-center-both cursor-pointer gap-2 w-[18rem] p-2"
                 onClick={() => handleWelcomePart(index)}
               >
                 <span className="flex items-center gap-2 w-full">
@@ -149,13 +154,19 @@ const Welcome = () => {
                   />
                   {en ? item.enWord : item.word}
                 </span>
-              </h3>
+              </p>
               {part === index &&
                 item.list?.map((subItem, subIndex) => (
                   <a
                     key={subIndex}
-                    className="w-full body-1 leading-tight pl-12 hover:underline"
-                    onClick={() => handleWelcomeOnChild(subIndex + 2)}
+                    className="w-full body-2 font-normal leading-tight pl-12 hover:underline cursor-pointer"
+                    onClick={() => {
+                      if (subItem.link) {
+                        navigate(`/browse/${subItem.link}`);
+                      } else {
+                        handleWelcomeOnChild(subIndex + 2);
+                      }
+                    }}
                   >
                     {en ? subItem.enWord : subItem.word}
                   </a>
@@ -166,10 +177,10 @@ const Welcome = () => {
 
         {/* Main Sections */}
         <div className="min-h-screen py-8 lg:border-l border-zinc-500 px-4 w-full">
-          <h3 className="h3 w-full font-semibold" ref={sections.whatWeOffer}>
+          <h5 className="h5 w-full font-semibold" ref={sections.whatWeOffer}>
             {en ? "What we provide" : "Ibyo dutanga"}
-          </h3>
-          <p className="body-1 leading-tight text-zinc-800 mb-12">
+          </h5>
+          <p className="body-2 leading-tight text-zinc-800 mb-12">
             {en
               ? "Look out our services and be able to browse for your desired properties easily."
               : "Reba mubyo tubafasha mubashe gushaka ibyo mwifuza biboroheye."}
@@ -184,7 +195,7 @@ const Welcome = () => {
           >
             {en ? "How to use" : "Uko ikoreshwa"}
           </h3>
-          <p className="body-1 leading-tight text-zinc-800 mb-12">
+          <p className="body-2 leading-tight text-zinc-800 mb-12">
             {en
               ? "Learn how to use Hamwe platform to get the best services and find your dream property with ease."
               : "Menya uko wakoresha urubuga rwa Hamwe kugira ngo ubone serivisi nziza kandi ushake icumbi wifuza byoroshye."}
@@ -222,7 +233,7 @@ const Welcome = () => {
           >
             {en ? "List Your Property" : "Tangaza umutungo wawe"}
           </h3>
-          <p className="body-1 leading-tight text-zinc-800 mb-12">
+          <p className="body-2 leading-tight text-zinc-800 mb-12">
             {en
               ? "To list your property, contact our team to assist you with the process. We’ll guide you through every step and help find buyers for your property."
               : "Kugira ngo utangaze umutungo wawe, hamagara itsinda ryacu rizagufasha muri buri cyiciro. Tuzagufasha gushaka abaguzi b'umurima wawe."}

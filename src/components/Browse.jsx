@@ -2,13 +2,18 @@ import React, { useState, useEffect, useContext } from "react";
 import axiosInstance from "./axiosInstance";
 import { browseChoices } from "./constants";
 import { AppContext } from "./AppContext";
-import { LoadingSticks } from "./Loader";
 import BrowseContent from "./BrowseContent";
+import { Outlet, useLocation, useNavigate, useParams } from "react-router-dom";
+import Sidebar from "./FilterSideBar";
+import Loader from "./Loader";
+import { ArrowSvg } from "../assets";
 
 const Browse = () => {
-  const [filter, setFilter] = useState([]);
-  const [choice, setChoice] = useState("houses");
-  const { en } = useContext(AppContext);
+  const { choice, id } = useParams();
+  const navigate = useNavigate();
+  const context = useContext(AppContext);
+  if (!context) return <Loader screen />;
+  const { setDataChoice, setDataFilter, en, data } = context;
   const [rwandaData, setRwandaData] = useState([]);
   const [selectedProvince, setSelectedProvince] = useState("");
   const [selectedDistrict, setSelectedDistrict] = useState("");
@@ -101,149 +106,65 @@ const Browse = () => {
   };
 
   const handleFilter = async () => {
-    setFilter({
-      province: selectedProvince,
-      district: selectedDistrict,
-      sector: selectedSector,
-      cell: selectedCell,
-      village: selectedVillage,
+    setDataFilter({
+      province: selectedProvince || "",
+      district: selectedDistrict || "",
+      sector: selectedSector || "",
+      cell: selectedCell || "",
+      village: selectedVillage || "",
     });
   };
 
+  useEffect(() => setDataChoice(choice), [choice]);
+
   return (
     <div className="w-full relative flex-1 flex-center-both">
-      <header className="w-full flex gap-2 bg-white px-8 shadow-md z-[100] sticky top-[4rem] h-[3rem]">
-        {browseChoices.map((item, index) => (
-          <div
-            className={`py-2 capitalize px-4 ${
-              choice === item.enName && "border-b-4 bg-zinc-200"
-            } border-blue-500`}
-            key={index}
-            onClick={() => setChoice(item.enName)}
-          >
-            {en ? item.enName : item.localName}
-          </div>
-        ))}
+      <header className="w-full flex gap-2 bg-white px-8 shadow-md z-[300] sticky top-[3.5rem] h-[3rem]">
+        {!id ? (
+          browseChoices.map((item, index) => (
+            <div
+              className={`py-2 capitalize px-4 ${
+                choice === item.enName && "border-b-4 bg-zinc-200"
+              } border-blue-500`}
+              key={index}
+              onClick={() => navigate(`/browse/${item.enName}`)}
+            >
+              {en ? item.enName : item.localName}
+            </div>
+          ))
+        ) : (
+          <img
+            src={ArrowSvg}
+            alt="arrow back"
+            className="w-6 h-full"
+            onClick={() => navigate(data?.length > 0 ? -1 : "/browse/houses")}
+          />
+        )}
       </header>
       <main className={`flex-1 w-full h-full flex`}>
-        <div className="min-w-[15rem] max-w-[15rem] flex-1 bg-white p-4 min-h-full">
-          <div className="sticky top-[7rem] w-full flex flex-col gap-4 pb-12 pt-4">
-            <h4 className="h4 leading-none">Address</h4>
-            <div>
-              <label>
-                {en ? "Province" : "Intara"}:
-                <select
-                  className="w-full mt-1 p-2 border border-gray-300 rounded-md bg-white shadow-sm focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
-                  value={selectedProvince}
-                  onChange={handleProvinceChange}
-                >
-                  <option value="">
-                    {en ? "Select Province" : "Hitamo Intara"}
-                  </option>
-                  {rwandaData.map((province) => (
-                    <option key={province.name} value={province.name}>
-                      {province.name}
-                    </option>
-                  ))}
-                </select>
-              </label>
-            </div>
-
-            <div>
-              <label>
-                {en ? "District" : "Akarere"}:
-                <select
-                  className="w-full mt-1 p-2 border border-gray-300 rounded-md bg-white shadow-sm focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
-                  value={selectedDistrict}
-                  onChange={handleDistrictChange}
-                  disabled={!districts.length}
-                >
-                  <option value="">
-                    {en ? "Select District" : "Hitamo Akarere"}
-                  </option>
-                  {districts.map((district) => (
-                    <option key={district.name} value={district.name}>
-                      {district.name}
-                    </option>
-                  ))}
-                </select>
-              </label>
-            </div>
-
-            <div>
-              <label>
-                {en ? "Sector" : "Umurenge"}:
-                <select
-                  className="w-full mt-1 p-2 border border-gray-300 rounded-md bg-white shadow-sm focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
-                  value={selectedSector}
-                  onChange={handleSectorChange}
-                  disabled={!sectors.length}
-                >
-                  <option value="">
-                    {en ? "Select Sector" : "Hitamo Umurenge"}
-                  </option>
-                  {sectors.map((sector) => (
-                    <option key={sector.name} value={sector.name}>
-                      {sector.name}
-                    </option>
-                  ))}
-                </select>
-              </label>
-            </div>
-
-            <div>
-              <label>
-                {en ? "Cell" : "Akagari"}:
-                <select
-                  className="w-full mt-1 p-2 border border-gray-300 rounded-md bg-white shadow-sm focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
-                  value={selectedCell}
-                  onChange={handleCellChange}
-                  disabled={!cells.length}
-                >
-                  <option value="">
-                    {en ? "Select Cell" : "Hitamo Akagari"}
-                  </option>
-                  {cells.map((cell) => (
-                    <option key={cell.name} value={cell.name}>
-                      {cell.name}
-                    </option>
-                  ))}
-                </select>
-              </label>
-            </div>
-
-            <div>
-              <label>
-                {en ? "Village" : "Umudugudu"}:
-                <select
-                  className="w-full mt-1 p-2 border border-gray-300 rounded-md bg-white shadow-sm focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
-                  value={selectedVillage}
-                  disabled={!villages.length}
-                  onChange={handleVillageChange}
-                >
-                  <option value="">
-                    {en ? "Select Village" : "Hitamo Umudugudu"}
-                  </option>
-                  {villages.map((village) => (
-                    <option key={village.name} value={village.name}>
-                      {village.name}
-                    </option>
-                  ))}
-                </select>
-              </label>
-            </div>
-
-            <button
-              className="button p-2 text-white bg-blue-700"
-              onClick={handleFilter}
-            >
-              {en ? "Filter" : "Shakisha"}
-            </button>
-          </div>
-        </div>
-
+        {!id && (
+          <Sidebar
+            selectedProvince={selectedProvince}
+            handleProvinceChange={handleProvinceChange}
+            selectedDistrict={selectedDistrict}
+            handleDistrictChange={handleDistrictChange}
+            selectedSector={selectedSector}
+            handleSectorChange={handleSectorChange}
+            selectedCell={selectedCell}
+            handleCellChange={handleCellChange}
+            selectedVillage={selectedVillage}
+            handleVillageChange={handleVillageChange}
+            districts={districts}
+            sectors={sectors}
+            cells={cells}
+            villages={villages}
+            rwandaData={rwandaData}
+            en={en}
+            handleFilter={handleFilter}
+          />
+        )}
         <div className="w-full flex-1 min-h-full">
-          <BrowseContent filter={filter} choice={choice} />
+          <Outlet />
         </div>
       </main>
     </div>

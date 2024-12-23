@@ -1,3 +1,4 @@
+import BrowseSkeleton from "./designs/BrowseSkeleton";
 import { Reserved } from "./Footer";
 
 export const LoadingSticks = () => {
@@ -15,10 +16,18 @@ export const LoadingSticks = () => {
   );
 };
 
+export const Skeleton = () => {
+  return (
+    <div className="w-full h-full bg-zinc-100 flex gap-8">
+      <div className="w-full h-full skeleton-loader bg-zinc-200"></div>
+    </div>
+  );
+};
+
 const Loader = ({ screen }) => {
   return (
-    <div className="fixed inset-0 z-[100] bg-zinc-100 flex flex-col py-4">
-      <LoadingSticks />
+    <div className="fixed inset-0 z-[100] bg-zinc-100 flex flex-col py-4 pt-[7rem]">
+      <Skeleton />
       {screen && <Reserved />}
     </div>
   );

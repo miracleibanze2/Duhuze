@@ -2,7 +2,9 @@ import { useContext, useEffect } from "react";
 import { AppContext } from "../AppContext";
 
 const Notice = () => {
-  const { notice, setNotice } = useContext(AppContext);
+  const context = useContext(AppContext);
+  if (!context) return;
+  const { notice, setNotice } = context;
 
   useEffect(() => {
     if (notice) {
@@ -15,7 +17,7 @@ const Notice = () => {
 
   return (
     notice !== "" && (
-      <div className="py-2 w-full bg-zinc-300 border-y border-zinc-400 text-center body-1 z-[1000] sticky top-[4rem]">
+      <div className="py-1 w-full bg-zinc-300 border-b border-zinc-400 text-center body-1 z-[1000] sticky top-[6.5rem]">
         {notice}
       </div>
     )

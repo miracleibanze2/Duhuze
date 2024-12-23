@@ -5,30 +5,36 @@ import Navbar from "./components/Navbar";
 import Footer from "./components/Footer";
 import Loader from "./components/Loader";
 import Notice from "./components/designs/Notice";
-import Browse from "./components/Browse";
+import BrowseContent from "./components/BrowseContent";
 
 const Welcome = lazy(() => import("./components/Welcome"));
+const Browse = lazy(() => import("./components/Browse"));
+const Details = lazy(() => import("./components/Details"));
 const PageNotFound = lazy(() => import("./components/PageNotFound"));
 
 const App = () => {
-  const { loading, screenLoad } = useContext(AppContext);
-  const mainLength = window.innerHeight - 192;
+  const context = useContext(AppContext);
+  if (!context) {
+    return <p>Error: App context is missing.</p>;
+  }
+
+  const { loading, screenLoad } = context;
 
   return (
     <>
       <Navbar />
       <Notice />
       {screenLoad && !loading && <Loader screen />}
-      <div
-        className={`w-full flex-1 relative flex-center-both`}
-        style={{ minHeight: `${mainLength}px` }}
-      >
+      <div className="w-full flex-1 relative flex-center-both min-h-screen">
         {loading && !screenLoad && <Loader />}
         <Suspense fallback={<Loader />}>
           <Routes>
             <Route path="/" element={<Welcome />} />
-            <Route path="/browse" exact element={<Browse />} />
-            <Route path="*" exact element={<PageNotFound />} />
+            <Route path="/browse/:choice" element={<Browse />}>
+              <Route index element={<BrowseContent />} />
+              <Route path=":id/:name" element={<Details />} />
+            </Route>
+            <Route path="*" element={<PageNotFound />} />
           </Routes>
         </Suspense>
       </div>
