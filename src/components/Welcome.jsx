@@ -100,7 +100,7 @@ const Welcome = () => {
   );
 
   return (
-    <div className="sm:min-h-max min-h-[50rem] flex-1 w-full relative">
+    <div className="w-full relative flex flex-col items-center">
       {/* Hero Section */}
       <div className="w-full lg:aspect-video md:aspect-[12/9] aspect-[4/3] border-b-2 border-black relative bg-blue-400">
         <div className="z-[40] absolute inset-0 bg-gradient-to-bottom pt-5 flex-top-center">
@@ -134,12 +134,15 @@ const Welcome = () => {
             className="w-full h-full"
           />
         </div>
+        {/* <div className="absolute inset-0 h-full w-[10rem] bg-green-400">
+          jhvjh
+        </div> */}
       </div>
 
       {/* Main Content */}
-      <div className="w-full h-full flex relative px-6 py-10 gap-4">
+      <div className="container w-full flex relative px-6 py-10 gap-4">
         {/* Sidebar Navigation */}
-        <div className="h-full sticky top-[5rem] hidden lg:flex-center-both">
+        <div className="h-max sticky top-[5rem] hidden lg:flex-center-both">
           {welcomeParts.map((item, index) => (
             <div className="w-full flex-center-both" key={index}>
               <p

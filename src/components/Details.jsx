@@ -2,18 +2,21 @@ import React, { useContext, useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import { AppContext } from "./AppContext";
 import axiosInstance from "./axiosInstance";
+import { HeartfillSvg, HeartstrokeSvg } from "../assets";
+import NotFound from "./designs/NotFound";
 
 const Details = () => {
   const { id } = useParams();
-  const { data, en, setNotice } = useContext(AppContext);
+  const { data, en, setNotice, likedProperties, toggleLikeProperty } =
+    useContext(AppContext);
   const [form, setForm] = useState({
     name: "",
     email: "",
     phone: "",
     message: "",
   });
-
   const property = data?.find((item) => item._id === id);
+  const isLiked = likedProperties?.has(property?._id);
 
   useEffect(() => {
     console.log("Selected Property:", property);
@@ -74,6 +77,18 @@ const Details = () => {
     verified: en ? "Verified" : "Igenzurwa",
   };
 
+  const toggleLike = (propertyId) => {
+    let updatedLikes;
+    if (likedProperties.includes(propertyId)) {
+      updatedLikes = likedProperties.filter((id) => id !== propertyId);
+    } else {
+      updatedLikes = [...likedProperties, propertyId];
+    }
+
+    setLikedProperties(updatedLikes);
+    localStorage.setItem("likedProperties", JSON.stringify(updatedLikes));
+  };
+
   return (
     <div className="min-h-screen py-10 flex flex-col lg:flex-row gap-8 lg:justify-center max-lg:items-center">
       {property ? (
@@ -106,39 +121,44 @@ const Details = () => {
             </div>
 
             <div className="p-6 transition-all duration-700 ease-in-out animate-slide-in">
-              <h1 className="text-3xl font-bold text-gray-800">
-                {property.title}
+              <h1 className="text-3xl font-bold text-gray-800 flex-between-hor">
+                <span>{property.title}</span>
+                <button onClick={() => toggleLike(id)}>
+                  <img
+                    src={isLiked ? HeartfillSvg : HeartstrokeSvg}
+                    alt={isLiked ? "Liked" : "Not Liked"}
+                    className="w-6 h-6"
+                  />
+                </button>
               </h1>
               <p className="text-gray-600 mt-2">{property.description}</p>
 
               <div className="mt-4 grid grid-cols-2 gap-4">
                 <div>
-                  <h2 className="text-lg font-medium text-gray-700">
+                  <h2 className="body-1 font-medium text-gray-700">
                     {localizedText.price}
                   </h2>
-                  <p className="text-xl font-bold text-gray-900">
+                  <p className="body-2 font-bold text-gray-900">
                     {property.price.toLocaleString()},000 Rwf
                   </p>
                 </div>
                 <div>
-                  <h2 className="text-lg font-medium text-gray-700">
+                  <h2 className="body-1 font-medium text-gray-700">
                     {localizedText.area}
                   </h2>
-                  <p className="text-xl text-gray-900">{property.area} m²</p>
+                  <p className="body-2 text-gray-900">{property.area} m²</p>
                 </div>
                 <div>
-                  <h2 className="text-lg font-medium text-gray-700">
+                  <h2 className="body-1 font-medium text-gray-700">
                     {localizedText.bedrooms}
                   </h2>
-                  <p className="text-xl text-gray-900">{property.bedrooms}</p>
+                  <p className="body-2 text-gray-900">{property.bedrooms}</p>
                 </div>
                 <div>
-                  <h2 className="text-lg font-medium text-gray-700">
+                  <h2 className="body-1 font-medium text-gray-700">
                     {localizedText.paymentType}
                   </h2>
-                  <p className="text-xl text-gray-900">
-                    {property.paymentType}
-                  </p>
+                  <p className="body-2 text-gray-900">{property.paymentType}</p>
                 </div>
               </div>
 
@@ -151,7 +171,7 @@ const Details = () => {
                     {property.additionalFeatures.map((feature, index) => (
                       <li
                         key={index}
-                        className="text-gray-600 flex items-center space-x-2"
+                        className="text-gray-600 flex items-center space-x-2 mb-1 "
                       >
                         <span className="bg-blue-500 text-white rounded-full p-1 text-xs">
                           ✔
@@ -187,7 +207,7 @@ const Details = () => {
               <h2 className="text-xl font-medium text-gray-700">
                 {localizedText.location}
               </h2>
-              <p className="text-gray-600 mt-2">
+              <p className="text-gray-600 mt-2 body-2">
                 <strong>{localizedText.province}:</strong>{" "}
                 {property.address.province} <br />
                 <strong>{localizedText.district}:</strong>{" "}
@@ -207,7 +227,9 @@ const Details = () => {
             <h2 className="text-2xl font-bold text-gray-800">
               {localizedText.interested}
             </h2>
-            <p className="text-gray-600 mt-2">{localizedText.sendDetails}</p>
+            <p className="text-gray-600 mt-2 body-2 leading-tight">
+              {localizedText.sendDetails}
+            </p>
 
             <form onSubmit={handleSubmit} className="mt-4 space-y-4">
               <div>
@@ -272,9 +294,7 @@ const Details = () => {
           </div>
         </>
       ) : (
-        <div className="opacity-0 transition-opacity duration-700 ease-in-out animate-fade-in">
-          Not found
-        </div>
+        <NotFound />
       )}
     </div>
   );

@@ -6,7 +6,7 @@ const PageNotFound = () => {
   const { en } = useContext(AppContext);
   const navigate = useNavigate();
   return (
-    <div className="w-full h-full flex-center-both">
+    <div className="w-full h-full flex-center-both ">
       <h1 className="h1">400</h1>
       <h4 className="h4">{en ? "Not found" : "Ntibibonetse"}</h4>
       <p className="body-1 font-light">

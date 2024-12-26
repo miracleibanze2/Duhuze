@@ -17,7 +17,7 @@ const Notice = () => {
 
   return (
     notice !== "" && (
-      <div className="py-1 w-full bg-zinc-300 border-b border-zinc-400 text-center body-1 z-[1000] sticky top-[6.5rem]">
+      <div className=" py-1 w-full bg-zinc-300 border-b border-zinc-400 text-center body-1 z-[1000] sticky top-[6.5rem]">
         {notice}
       </div>
     )

@@ -25,6 +25,7 @@ const AppContextProvider = ({ children }) => {
   const [dataFilter, setDataFilter] = useState({});
   const [error, setError] = useState(null);
   const bottomRef = useRef(null);
+  const [likedProperties, setLikedProperties] = useState(new Set());
 
   useEffect(() => {
     setLoading(true);
@@ -120,12 +121,15 @@ const AppContextProvider = ({ children }) => {
       const [entry] = entries;
 
       if (entry.isIntersecting && !stop && datachoice === currentDataName) {
+        console.log("normal call");
+        setLoadingResults(true);
         fetchData();
       } else if (datachoice !== currentDataName) {
         pageRef.current = 1;
         setPage(0);
         setStop(false);
         console.log("new fetch");
+        setLoadingResults(true);
         fetchData();
       }
     };
@@ -150,9 +154,47 @@ const AppContextProvider = ({ children }) => {
     setPage(0);
     pageRef.current = 1;
     setData([]);
-    setLoadingResults(true);
     fetchData();
+    window.scrollTo(0, 0);
   }, [dataFilter]);
+
+  useEffect(() => {
+    const savedLikes =
+      JSON.parse(localStorage.getItem("likedProperties")) || [];
+    setLikedProperties(new Set(savedLikes));
+  }, []);
+  // Sync liked properties to localStorage
+  useEffect(() => {
+    if (likedProperties.size > 0) {
+      localStorage.setItem(
+        "likedProperties",
+        JSON.stringify([...likedProperties])
+      );
+    }
+  }, [likedProperties]);
+
+  const toggleLikeProperty = async (propertyId) => {
+    const alreadyLiked = likedProperties.has(propertyId);
+    try {
+      if (!alreadyLiked) {
+        await axiosInstance.post("/property-like", {
+          id: propertyId,
+          type: datachoice,
+        });
+      }
+      setLikedProperties((prev) => {
+        const updatedLikes = new Set(prev);
+        if (alreadyLiked) {
+          updatedLikes.delete(propertyId);
+        } else {
+          updatedLikes.add(propertyId);
+        }
+        return updatedLikes;
+      });
+    } catch (error) {
+      console.error("Error updating like:", error);
+    }
+  };
 
   return (
     <AppContext.Provider
@@ -173,6 +215,9 @@ const AppContextProvider = ({ children }) => {
         datachoice,
         setDataChoice,
         setDataFilter,
+        likedProperties,
+        setLikedProperties,
+        toggleLikeProperty,
       }}
     >
       {children}

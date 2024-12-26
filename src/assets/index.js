@@ -13,7 +13,11 @@ import electronics from "./images/electronics.jpg";
 
 import checkSvg from "./svgs/check.svg";
 import ArrowSvg from "./svgs/arrow-left.svg";
+import HeartfillSvg from "./svgs/heart-fill.svg";
+import HeartstrokeSvg from "./svgs/heart-stroke.svg";
 
+import notFound from "./images/404.png";
+import somethingWrong from "./images/500.png";
 export {
   logo,
   forSales,
@@ -28,4 +32,8 @@ export {
   electronics,
   checkSvg,
   ArrowSvg,
+  HeartfillSvg,
+  HeartstrokeSvg,
+  notFound,
+  somethingWrong,
 };

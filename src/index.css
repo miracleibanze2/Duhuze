@@ -8,7 +8,9 @@
   box-sizing: border-box;
   color: #1a1a1af5;
 }
-
+body {
+  @apply flex justify-center;
+}
 .font-hand {
   font-family: var(--font-hand);
 }

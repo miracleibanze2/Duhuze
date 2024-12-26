@@ -18,7 +18,9 @@ export const LoadingSticks = () => {
 
 export const Skeleton = () => {
   return (
-    <div className="w-full h-full bg-zinc-100 flex gap-8">
+    <div className="w-full h-full flex container flex-col pt-[3.5rem]">
+      <div className="w-full h-[3rem] skeleton-loader bg-white"></div>
+
       <div className="w-full h-full skeleton-loader bg-zinc-200"></div>
     </div>
   );
@@ -26,7 +28,7 @@ export const Skeleton = () => {
 
 const Loader = ({ screen }) => {
   return (
-    <div className="fixed inset-0 z-[100] bg-zinc-100 flex flex-col py-4 pt-[7rem]">
+    <div className="fixed inset-0 z-[100] bg-zinc-100 flex flex-col py-4 items-center">
       <Skeleton />
       {screen && <Reserved />}
     </div>
