@@ -61,7 +61,7 @@ export const PropertyCard = ({ property, onViewDetails }) => {
               {en ? "Price" : "Igiciro"}
             </p>
             <p className="text-lg font-bold text-gray-900">
-              {price.toLocaleString()} Rwf
+              {price?.toLocaleString()} Rwf
             </p>
           </div>
           <div>
