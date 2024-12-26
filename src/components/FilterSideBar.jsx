@@ -16,7 +16,6 @@ const Sidebar = ({
   en,
   rwandaData,
   className,
-  
 }) => {
   return (
     <div
@@ -40,7 +39,7 @@ const Sidebar = ({
           <option value="">{en ? "Select Province" : "Hitamo Intara"}</option>
           {rwandaData?.map((province) => (
             <option key={province.name} value={province.name}>
-              {province.name}
+              {en ? province.name : province.localname}
             </option>
           ))}
         </select>
@@ -56,7 +55,7 @@ const Sidebar = ({
           <option value="">{en ? "Select District" : "Hitamo Akarere"}</option>
           {districts.map((district) => (
             <option key={district.name} value={district.name}>
-              {district.name}
+              {en ? district.name : district.localname}
             </option>
           ))}
         </select>
@@ -72,7 +71,7 @@ const Sidebar = ({
           <option value="">{en ? "Select Sector" : "Hitamo Umurenge"}</option>
           {sectors.map((sector) => (
             <option key={sector.name} value={sector.name}>
-              {sector.name}
+              {en ? sector.name : sector.localname}
             </option>
           ))}
         </select>
@@ -88,7 +87,7 @@ const Sidebar = ({
           <option value="">{en ? "Select Cell" : "Hitamo Akagari"}</option>
           {cells.map((cell) => (
             <option key={cell.name} value={cell.name}>
-              {cell.name}
+              {en ? cell.name : cell.localname}
             </option>
           ))}
         </select>
@@ -104,7 +103,7 @@ const Sidebar = ({
           <option value="">{en ? "Select Village" : "Hitamo Umudugudu"}</option>
           {villages.map((village) => (
             <option key={village.name} value={village.name}>
-              {village.name}
+              {en ? village.name : village.localname}
             </option>
           ))}
         </select>
