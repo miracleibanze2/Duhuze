@@ -174,8 +174,8 @@ const Browse = () => {
         </div>
       </header>
       <main className={`flex-1 w-full h-full flex justify-center bg-white`}>
-        <div className="container flex w-full flex-1 lg:flex-row flex-col">
-          {!id && (
+        <div className="container flex w-full flex-1 lg:flex-row flex-col min-h-[30rem]">
+          {!id && choice !== "electronics" && (
             <>
               <div className="p-2 lg:hidden flex relative w-full flex-1 px-6">
                 <div
@@ -218,11 +218,11 @@ const Browse = () => {
                 )}
               </div>
               <div
-                className={`min-w-[15rem] max-w-[15rem] flex-1 bg-white p-4 h-full lg:flex hidden ${
+                className={`min-w-[15rem] max-w-[15rem] flex-1 p-4 h-full lg:flex hidden ${
                   pathname === "/browse/electronics" && "hidden"
                 }`}
               >
-                <div className="sticky top-[7rem] w-full">
+                <div className="sticky top-[7rem] w-full h-max">
                   <Sidebar
                     selectedProvince={selectedProvince}
                     handleProvinceChange={handleProvinceChange}
