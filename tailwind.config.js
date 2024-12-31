@@ -49,6 +49,10 @@ export default {
           "@apply text-xs font-bold text-[0.875rem] leading-6 md:text-base font-semibold tracking-wider":
             {},
         },
+        ".input": {
+          "@apply text-sm w-full p-1 pl-3 border cursor-pointer border-gray-300 rounded-md bg-white shadow-sm focus:ring-2 focus:ring-blue-500 focus:border-blue-500":
+            {},
+        },
       });
     }),
   ],

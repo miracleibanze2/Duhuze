@@ -6,11 +6,10 @@ import { useLocation, useNavigate } from "react-router-dom";
 import { HeartfillSvg, HeartstrokeSvg } from "../assets";
 
 export const PropertyCard = ({ property, onViewDetails }) => {
-  const { title, price, area, bedrooms, images, location, isAvailable } =
+  const { title, price, area, bedrooms, images, location, isAvailable, likes } =
     property;
   const { en, likedProperties, toggleLikeProperty } = useContext(AppContext);
   const isLiked = likedProperties?.has(property._id);
-  const { pathname } = useLocation();
 
   return (
     <div className="group relative bg-white shadow-lg rounded-lg overflow-hidden hover:shadow-2xl transition-shadow duration-300 min-w-72 max-w-xs border border-gray-200">
@@ -53,34 +52,38 @@ export const PropertyCard = ({ property, onViewDetails }) => {
         <h3 className="text-lg font-bold text-gray-800 group-hover:text-blue-600 transition-colors duration-300 flex-between-hor">
           {title}
         </h3>
-        <p className="text-sm text-gray-500 mt-2">{location}</p>
+        <p className="text-sm text-gray-500">{location}</p>
+        <p className="text-sm text-gray-500">
+          {!en && "abakunze "}
+          {likes || 0}&nbsp;{en && "likes"}
+        </p>
 
-        <div className="flex justify-between items-center mt-4">
-          <div>
-            <p className="text-sm font-medium text-gray-600">
+        <div className="flex justify-between items-center mt-4 border-y">
+          <div className="border-r pt-2">
+            <p className="text-sm font-medium text-gray-600 border-b pr-2">
               {en ? "Price" : "Igiciro"}
             </p>
-            <p className="text-lg font-bold text-gray-900">
+            <p className="text-lg font-bold text-gray-900 pr-2">
               {price?.toLocaleString()} Rwf
             </p>
           </div>
-          <div>
-            <p className="text-sm font-medium text-gray-600">
+          <div className="border-r pt-2 flex-1">
+            <p className="text-sm font-medium text-gray-600 px-2 border-b">
               {en ? "Area" : "Ubugari"}
             </p>
-            <p className="text-lg font-bold text-gray-900">{area} m²</p>
+            <p className="text-lg font-bold text-gray-900 px-2">{area} m²</p>
           </div>
-          <div>
-            <p className="text-sm font-medium text-gray-600">
+          <div className="pt-2">
+            <p className="text-sm font-medium text-gray-600 border-b pl-2">
               {en ? "Bedrooms" : "Ibyumba"}
             </p>
-            <p className="text-lg font-bold text-gray-900">{bedrooms}</p>
+            <p className="text-lg font-bold text-gray-900 pl-2">{bedrooms}</p>
           </div>
         </div>
 
         <button
           onClick={onViewDetails}
-          className="button mt-6 w-full py-2 px-4 bg-blue-600 text-white rounded-lg shadow-md hover:bg-blue-700 focus:outline-none focus:ring focus:ring-blue-200 transition-colors duration-300"
+          className="button mt-6 w-full py-2 px-4 bg-blue-600 text-white shadow-md hover:bg-blue-700 focus:outline-none focus:ring focus:ring-blue-200 transition-colors duration-300"
         >
           {en ? "View Details" : "Reba byinshi"}
         </button>

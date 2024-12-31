@@ -1,4 +1,4 @@
-import { useContext, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import {
   angleDownSvg,
   checkSvg,
@@ -23,6 +23,8 @@ const Navbar = () => {
     setChooseLang(false);
     setMenu(false);
   };
+
+  useEffect(() => setMenu(false), [pathname]);
 
   return (
     <div className="flex w-full sticky top-0 justify-center bg-white h-[3.5rem] shadow-md z-[999]">
@@ -84,13 +86,15 @@ const Navbar = () => {
             )}
           </label>
 
-          <img
-            src={handShake}
-            alt="for sale banner"
-            width={800}
-            height={700}
-            className="w-full h-auto object-right object-fit md:hidden"
-          />
+          <div className="relative img welcome">
+            <img
+              src={handShake}
+              alt="for sale banner"
+              width={800}
+              height={700}
+              className="w-full h-auto object-right object-fit md:hidden relative"
+            />
+          </div>
           {pathname === "/" ? (
             <button
               className="md:px-6 px-3 bg-blue-500 button text-white body-1 flex items-center flex-nowrap min-w-max h-10 text-center"

@@ -2,11 +2,10 @@ import React, { useState, useEffect, useContext } from "react";
 import axiosInstance from "./axiosInstance";
 import { browseChoices } from "./constants";
 import { AppContext } from "./AppContext";
-import BrowseContent from "./BrowseContent";
 import { Outlet, useLocation, useNavigate, useParams } from "react-router-dom";
 import Sidebar from "./FilterSideBar";
 import Loader from "./Loader";
-import { angleDownSvg, ArrowSvg } from "../assets";
+import { ArrowSvg } from "../assets";
 import NotFound from "./designs/NotFound";
 
 const Browse = () => {
@@ -28,7 +27,9 @@ const Browse = () => {
   const [sectors, setSectors] = useState([]);
   const [cells, setCells] = useState([]);
   const [villages, setVillages] = useState([]);
-  const [toggleFilter, setToggleFilter] = useState(true);
+  const [paymentType, setPaymentType] = useState("");
+  const [minimumPrice, setMinimumPrice] = useState("");
+  const [maximumPrice, setMaximumPrice] = useState("");
 
   useEffect(() => {
     const fetchData = async () => {
@@ -61,12 +62,18 @@ const Browse = () => {
     setCells([]);
     setSelectedVillage("");
     setVillages([]);
+    setPaymentType("");
+    setMinimumPrice(null);
+    setMaximumPrice(null);
     setDataFilter({
       selectedProvince: "",
       selectedDistrict: "",
       selectedSector: "",
       selectedCell: "",
       selectedVillage: "",
+      paymentType: "",
+      minimumPrice: "",
+      maximumPrice: "",
     });
   }, [pathname]);
   const handleDistrictChange = (e) => {
@@ -124,13 +131,16 @@ const Browse = () => {
     setSelectedVillage(e.target.value);
   };
 
-  const handleFilter = async () => {
+  const handleFilter = () => {
     setDataFilter({
       province: selectedProvince || "",
       district: selectedDistrict || "",
       sector: selectedSector || "",
       cell: selectedCell || "",
       village: selectedVillage || "",
+      paymentType: paymentType || "",
+      minimumPrice: minimumPrice || "",
+      maximumPrice: maximumPrice || "",
     });
   };
 
@@ -141,7 +151,7 @@ const Browse = () => {
       return browseChoices.map((item, index) => (
         <div
           key={index}
-          className={`py-2 capitalize px-4 ${
+          className={`py-2 capitalize px-5 hover:bg-zinc-100 cursor-pointer ${
             choice === item.enName && "border-b-4 bg-zinc-200"
           } border-blue-500`}
           onClick={() => navigate(`/browse/${item.enName}`)}
@@ -169,89 +179,114 @@ const Browse = () => {
   return (
     <>
       <header className="w-full flex justify-center bg-white shadow-md z-[300] sticky top-[3.5rem] h-[3rem]">
-        <div className="container w-full flex gap-2 px-8">
+        <div className="container w-full flex px-8 max-sm:justify-between">
           {renderHeaderContent()}
         </div>
       </header>
       <main className={`flex-1 w-full h-full flex justify-center bg-white`}>
-        <div className="container flex w-full flex-1 lg:flex-row flex-col min-h-[30rem]">
+        <div className="container w-full flex-1 lg:flex-row flex-col min-h-[30rem]">
           {!id && choice !== "electronics" && (
-            <>
-              <div className="p-2 lg:hidden flex relative w-full flex-1 px-6">
-                <div
-                  className="body-1 font-semibold flex-between-hor gap-6 w-full max-w-xs px-4 rounded-md hover:bg-zinc-300"
-                  onClick={() => setToggleFilter(!toggleFilter)}
-                >
-                  Filter
-                  <img src={angleDownSvg} alt="filter" className="w-5 h-5" />
-                </div>
-                {toggleFilter && (
-                  <div className="absolute top-full right-0 left-0 z-[10] bg-zinc-100 pb-12 shadow-md flex flex-col px-5">
-                    <Sidebar
-                      {...{
-                        selectedProvince,
-                        handleProvinceChange,
-                        selectedDistrict,
-                        handleDistrictChange,
-                        selectedSector,
-                        handleSectorChange,
-                        selectedCell,
-                        handleCellChange,
-                        selectedVillage,
-                        handleVillageChange,
-                        districts,
-                        sectors,
-                        cells,
-                        villages,
-                        rwandaData,
-                        en,
-                      }}
-                      className="flex flex-wrap p-3 gap-4 items-center"
-                    />
-                    <button
-                      className="button p-1 text-white bg-blue-700 flex-1 my-2"
-                      onClick={handleFilter}
-                    >
-                      {en ? "Filter" : "Shakisha"}
-                    </button>
-                  </div>
-                )}
-              </div>
-              <div
-                className={`min-w-[15rem] max-w-[15rem] flex-1 p-4 h-full lg:flex hidden ${
-                  pathname === "/browse/electronics" && "hidden"
-                }`}
-              >
-                <div className="sticky top-[7rem] w-full h-max">
+            <div className="p-2 relative w-full flex-1 px-6 mb-8">
+              <h5 className="body-1 font-semibold flex-between-hor gap-6 w-full max-w-xs px-4 rounded-md hover:bg-zinc-300">
+                {en ? "Filter" : "Shakisha"}
+              </h5>
+
+              <div className="w-full z-[10] bg-zinc-100 pb-6 shadow-md flex flex-col px-5">
+                <div className="w-full grid md:grid-cols-4 grid-cols-2">
                   <Sidebar
-                    selectedProvince={selectedProvince}
-                    handleProvinceChange={handleProvinceChange}
-                    selectedDistrict={selectedDistrict}
-                    handleDistrictChange={handleDistrictChange}
-                    selectedSector={selectedSector}
-                    handleSectorChange={handleSectorChange}
-                    selectedCell={selectedCell}
-                    handleCellChange={handleCellChange}
-                    selectedVillage={selectedVillage}
-                    handleVillageChange={handleVillageChange}
-                    districts={districts}
-                    sectors={sectors}
-                    cells={cells}
-                    villages={villages}
-                    rwandaData={rwandaData}
-                    en={en}
+                    {...{
+                      selectedProvince,
+                      handleProvinceChange,
+                      selectedDistrict,
+                      handleDistrictChange,
+                      selectedSector,
+                      handleSectorChange,
+                      selectedCell,
+                      handleCellChange,
+                      selectedVillage,
+                      handleVillageChange,
+                      districts,
+                      sectors,
+                      cells,
+                      villages,
+                      rwandaData,
+                      en,
+                    }}
+                    search
+                    className="flex flex-wrap p-3 gap-4 flex-col"
                   />
-                  <button
-                    className="button p-1 text-white bg-blue-700 w-full my-2"
-                    onClick={handleFilter}
-                  >
-                    {en ? "Filter" : "Shakisha"}
-                  </button>
+                  <div className="w-full flex flex-wrap p-3 gap-4 flex-col">
+                    <p className="body-1 text-zinc-900 leading-none">
+                      {en ? "Payment Type" : "Ubwoko bw'ubwishyu"}
+                    </p>
+                    <select
+                      name="payment"
+                      className="input text-sm"
+                      value={paymentType}
+                      onChange={(e) => setPaymentType(e.target.value)}
+                    >
+                      <option value="">
+                        {en ? "Select payment" : "Hitamo ubwishyu"}
+                      </option>
+                      <option value="mortgage">
+                        {en ? "Mortgage" : "Inguzanyo"}
+                      </option>
+                      <option value="cash">
+                        {en ? "Cash" : "Amafaranga yose"}
+                      </option>
+                      <option value="installments">
+                        {en ? "Installments" : "Kwishyura mu byiciro"}
+                      </option>
+                      <option value="monthly Rent">
+                        {en ? "Monthly Rent" : "Ubukode bwa buri kwezi"}
+                      </option>
+                    </select>
+                  </div>
+                  <div className="w-full flex flex-wrap p-3 gap-4 flex-col">
+                    <p className="body-1 text-zinc-900 leading-none">
+                      {en ? "Minimum price" : "Igiciro ntarengwa gito"}
+                    </p>
+                    <input
+                      type="number"
+                      name="minimum"
+                      className="input"
+                      step="500"
+                      min="0"
+                      value={minimumPrice}
+                      onChange={(e) => setMinimumPrice(e.target.value)}
+                      placeholder={
+                        en ? "Choose minimum price" : "Hitamo igiciro gito"
+                      }
+                    />
+                  </div>
+                  <div className="w-full flex flex-wrap p-3 gap-4 flex-col">
+                    <p className="body-1 text-zinc-900 leading-none">
+                      {en ? "Maximum price" : "Igiciro ntarengwa kinini"}
+                    </p>
+                    <input
+                      type="number"
+                      name="maximum"
+                      className="input"
+                      step="500"
+                      min="0"
+                      value={maximumPrice}
+                      onChange={(e) => setMaximumPrice(e.target.value)}
+                      placeholder={
+                        en ? "Choose maximum price" : "hitamo igiciro kinini"
+                      }
+                    />
+                  </div>
                 </div>
+                <button
+                  className="button p-1 text-white bg-blue-700 px-12 mt-6 mx-auto"
+                  onClick={handleFilter}
+                >
+                  {en ? "Filter" : "Shakisha"}
+                </button>
               </div>
-            </>
+            </div>
           )}
-          <div className="w-full flex-1 min-h-full bg-zinc-100">
+          <div className="w-full flex-1 min-h-full bg-zinc-100 pt-8">
             <Outlet />
           </div>
         </div>

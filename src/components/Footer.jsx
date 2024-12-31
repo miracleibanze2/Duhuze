@@ -46,7 +46,7 @@ const Footer = () => {
   };
 
   return (
-    <footer className="bg-white py-8 w-full flex items-center flex-col h-max pt-16">
+    <footer className="bg-white py-8 w-full flex items-center flex-col h-max pt-16 z-[100]">
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8 container px-4">
         {/* Contact Section */}
         <div>

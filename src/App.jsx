@@ -40,7 +40,14 @@ const App = () => {
             </Route>
             <Route path="/list/new/property" element={<ListNew />} />
             <Route path="/list/terms&policies" element={<TermsAndPolicies />} />
-            <Route path="*" element={<NotFound />} />
+            <Route
+              path="*"
+              element={
+                <div className="w-full relative min-h-[90vh]">
+                  <NotFound />
+                </div>
+              }
+            />
           </Routes>
         </Suspense>
       </div>

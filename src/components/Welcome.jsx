@@ -66,7 +66,7 @@ const Welcome = () => {
         <h5 className="h5 font-semibold leading-none mb-4 text-center">
           {en ? item.enName : item.name}
         </h5>
-        <p className="body-2 leading-none h-full text-center">
+        <p className="text-sm leading-none h-full text-center">
           {en ? item.enDescription : item.description}
         </p>
         <button
@@ -86,7 +86,7 @@ const Welcome = () => {
       <h5 className="h5" ref={ref}>
         {en ? title.en : title.local}
       </h5>
-      <ol className="pl-[1rem] body-2 font-normal list-decimal">
+      <ol className="pl-[1rem] text-sm list-decimal">
         {steps.map((step, idx) => (
           <li className="mb-4 text-zinc-700" key={idx}>
             <span className="font-semibold">
@@ -102,30 +102,33 @@ const Welcome = () => {
   return (
     <div className="w-full relative flex flex-col items-center">
       {/* Hero Section */}
-      <div className="w-full lg:aspect-video md:aspect-[12/9] aspect-[4/3] border-b-2 border-black relative bg-blue-400">
-        <div className="z-[40] absolute inset-0 bg-gradient-to-bottom pt-5 flex-top-center">
-          <div className="flex-top-center z-[40] bg-floor w-max rounded-b-full pb-2 px-10">
-            <h1 className="md:h1 sm:h2 h3 font-semibold">
+      <header
+        id="welcome"
+        className="w-full lg:aspect-video md:aspect-[12/9] aspect-[4/3] relative bg-blue-400"
+      >
+        <div className="welcome z-[40] absolute inset-0 bg-[#010435b2] pt-5 flex-top-center">
+          <div className="flex-top-center z-[40] w-max rounded-b-full pb-2 px-10">
+            <h1 className="md:h1 sm:h2 h3 font-semibold text-white">
               {en ? "Browse Verified Properties," : "Shakisha imitungo yemewe,"}
             </h1>
-            <h2 className="md:h2 sm:h3 h4 font-semibold">
+            <h2 className="md:h2 sm:h3 h4 font-semibold text-white">
               {en
                 ? "List yours with confidence."
                 : "Umenyekanishe iyawe ubyizeye."}
             </h2>
-            <p className="body-1 capitalize">
+            <p className="body-1 capitalize text-white">
               {en
                 ? "Submit a request to get started with our team"
                 : "Tanga ubusabe ufatanye n'abakozi bacu"}
             </p>
-            <p className="body-1 capitalize">
+            <p className="body-1 capitalize text-white">
               {en
                 ? "We will guide you every step of the way"
                 : "Tugufashe muri buri nzira."}
             </p>
           </div>
         </div>
-        <div className="w-full h-full overflow-hidden sm:pt-0 pt-8">
+        <div className="w-full h-full overflow-hidden  -z-1">
           <img
             src={handShake}
             alt="for sale banner"
@@ -137,7 +140,7 @@ const Welcome = () => {
         {/* <div className="absolute inset-0 h-full w-[10rem] bg-green-400">
           jhvjh
         </div> */}
-      </div>
+      </header>
 
       {/* Main Content */}
       <div className="container w-full flex relative px-6 py-10 gap-4">
@@ -162,7 +165,7 @@ const Welcome = () => {
                 item.list?.map((subItem, subIndex) => (
                   <a
                     key={subIndex}
-                    className="w-full body-2 font-normal leading-tight pl-12 hover:underline cursor-pointer"
+                    className="w-full text-sm font-normal leading-tight pl-12 hover:underline cursor-pointer"
                     onClick={() => {
                       if (subItem.link) {
                         navigate(`/browse/${subItem.link}`);
@@ -183,7 +186,7 @@ const Welcome = () => {
           <h5 className="h5 w-full font-semibold" ref={sections.whatWeOffer}>
             {en ? "What we provide" : "Ibyo dutanga"}
           </h5>
-          <p className="body-2 leading-tight text-zinc-800 mb-12">
+          <p className="text-sm leading-tight text-zinc-800 mb-12">
             {en
               ? "Look out our services and be able to browse for your desired properties easily."
               : "Reba mubyo tubafasha mubashe gushaka ibyo mwifuza biboroheye."}
@@ -198,7 +201,7 @@ const Welcome = () => {
           >
             {en ? "How to use" : "Uko ikoreshwa"}
           </h3>
-          <p className="body-2 leading-tight text-zinc-800 mb-12">
+          <p className="text-sm leading-tight text-zinc-800 mb-12">
             {en
               ? "Learn how to use Hamwe platform to get the best services and find your dream property with ease."
               : "Menya uko wakoresha urubuga rwa Hamwe kugira ngo ubone serivisi nziza kandi ushake icumbi wifuza byoroshye."}
@@ -236,17 +239,17 @@ const Welcome = () => {
           >
             {en ? "List Your Property" : "Tangaza umutungo wawe"}
           </h3>
-          <p className="body-2 leading-tight text-zinc-800 mb-12">
+          <p className="text-sm leading-tight text-zinc-800 mb-12">
             {en
               ? "To list your property, contact our team to assist you with the process. We’ll guide you through every step and help find buyers for your property."
               : "Kugira ngo utangaze umutungo wawe, hamagara itsinda ryacu rizagufasha muri buri cyiciro. Tuzagufasha gushaka abaguzi b'umurima wawe."}
           </p>
-          <ol className="pl-[1rem] list-decimal mb-8">
+          <ul className="pl-[1rem] list-none list-outside mb-8">
             <li className="mb-4">
               <span className="font-semibold">
                 {en
-                  ? "Step 1: Request Assistance"
-                  : "Intambwe ya 1: Saba Ubufasha"}
+                  ? "Step 1: Request Assistance, "
+                  : "Intambwe ya 1: Saba Ubufasha, "}
               </span>
               {en
                 ? "Contact our team to get started with listing your property."
@@ -255,8 +258,8 @@ const Welcome = () => {
             <li className="mb-4">
               <span className="font-semibold">
                 {en
-                  ? "Step 2: Sign the Agreement"
-                  : "Intambwe ya 2: Sinyisha Amasezerano"}
+                  ? "Step 2: Sign the Agreement, "
+                  : "Intambwe ya 2: Sinyisha Amasezerano, "}
               </span>
               {en
                 ? "Sign a service agreement with us to proceed with listing and selling your property."
@@ -265,14 +268,14 @@ const Welcome = () => {
             <li className="mb-4">
               <span className="font-semibold">
                 {en
-                  ? "Step 3: We Handle the Rest"
-                  : "Intambwe ya 3: Turi Gufasha Gusohoza"}
+                  ? "Step 3: We Handle the Rest, "
+                  : "Intambwe ya 3: Turi Gufasha Gusohoza, "}
               </span>
               {en
                 ? "Our team will take care of the listing process and work to find a buyer for your property."
                 : "Itsinda ryacu rizafasha mu gukora itangazo ry'umutungo wawe kandi rizagushakira umuguzi."}
             </li>
-          </ol>
+          </ul>
         </div>
       </div>
     </div>

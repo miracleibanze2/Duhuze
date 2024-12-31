@@ -16,6 +16,7 @@ const Sidebar = ({
   en,
   rwandaData,
   className,
+  search,
 }) => {
   return (
     <div
@@ -30,9 +31,9 @@ const Sidebar = ({
       >
         Address
       </h5>
-      <div className="text-sm">
+      <div>
         <select
-          className="w-full p-1 border cursor-pointer border-gray-300 rounded-md bg-white shadow-sm focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
+          className="input"
           value={selectedProvince}
           onChange={handleProvinceChange}
         >
@@ -45,9 +46,15 @@ const Sidebar = ({
         </select>
       </div>
 
-      <div>
+      <div
+        className={`${
+          search &&
+          (districts.length === 0 || rwandaData?.length === 0) &&
+          "hidden"
+        }`}
+      >
         <select
-          className="w-full p-1 border cursor-pointer border-gray-300 rounded-md bg-white shadow-sm focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
+          className="input"
           value={selectedDistrict}
           onChange={handleDistrictChange}
           disabled={!districts.length}
@@ -61,9 +68,17 @@ const Sidebar = ({
         </select>
       </div>
 
-      <div>
+      <div
+        className={`${
+          search &&
+          (sectors.length === 0 ||
+            districts.length === 0 ||
+            rwandaData?.length === 0) &&
+          "hidden"
+        }`}
+      >
         <select
-          className="w-full p-1 border cursor-pointer border-gray-300 rounded-md bg-white shadow-sm focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
+          className="input"
           value={selectedSector}
           onChange={handleSectorChange}
           disabled={!sectors.length}
@@ -77,9 +92,18 @@ const Sidebar = ({
         </select>
       </div>
 
-      <div>
+      <div
+        className={`${
+          search &&
+          (cells.length === 0 ||
+            sectors.length === 0 ||
+            districts.length === 0 ||
+            rwandaData?.length === 0) &&
+          "hidden"
+        }`}
+      >
         <select
-          className="w-full p-1 border cursor-pointer border-gray-300 rounded-md bg-white shadow-sm focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
+          className="input"
           value={selectedCell}
           onChange={handleCellChange}
           disabled={!cells.length}
@@ -93,9 +117,19 @@ const Sidebar = ({
         </select>
       </div>
 
-      <div>
+      <div
+        className={`${
+          search &&
+          (villages.length === 0 ||
+            cells.length === 0 ||
+            sectors.length === 0 ||
+            districts.length === 0 ||
+            rwandaData?.length === 0) &&
+          "hidden"
+        }`}
+      >
         <select
-          className="w-full p-1 border cursor-pointer border-gray-300 rounded-md bg-white shadow-sm focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
+          className="input"
           value={selectedVillage}
           disabled={!villages.length}
           onChange={handleVillageChange}

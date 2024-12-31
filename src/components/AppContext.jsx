@@ -177,15 +177,34 @@ const AppContextProvider = ({ children }) => {
     const alreadyLiked = likedProperties.has(propertyId);
     try {
       if (!alreadyLiked) {
-        await axiosInstance.post("/property-like", {
+        const response = await axiosInstance.post("/property-like", {
           id: propertyId,
           type: datachoice,
         });
+
+        const updatedProperty = response.data.property;
+
+        // Update only the specific property in the data array
+        setData((prevData) =>
+          prevData.map((item) =>
+            item._id === updatedProperty._id ? updatedProperty : item
+          )
+        );
       }
+
       setLikedProperties((prev) => {
         const updatedLikes = new Set(prev);
         if (alreadyLiked) {
           updatedLikes.delete(propertyId);
+
+          // Update the 'likes' field of the item in the data array
+          setData((prevData) =>
+            prevData.map((item) =>
+              item._id === propertyId
+                ? { ...item, likes: item.likes - 1 }
+                : item
+            )
+          );
         } else {
           updatedLikes.add(propertyId);
         }
