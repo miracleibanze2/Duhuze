@@ -3,7 +3,7 @@ import { AppContext } from "./AppContext";
 import { ArrowSvg } from "../assets";
 import { useNavigate } from "react-router-dom";
 
-const TermsAndPolicies = () => {
+const TermsOfService = () => {
   const { en } = useContext(AppContext);
   const navigate = useNavigate();
 
@@ -14,30 +14,39 @@ const TermsAndPolicies = () => {
           <img
             src={ArrowSvg}
             alt="arrow back"
-            className="w-6 h-full"
+            className="w-6 h-full cursor-pointer"
             onClick={() => navigate(-1)}
           />
         </div>
       </header>
-      <div className=" min-h-screen py-10 bg-gray-50 w-full">
+      <div className="min-h-screen py-10 bg-gray-50 w-full">
         <div className="max-w-4xl mx-auto bg-white shadow-lg rounded-lg p-8">
-          {/* Company Overview */}
+          {/* Introduction */}
           <h1 className="text-2xl font-bold mb-6 text-gray-800">
-            {en ? "Terms and Policies" : "Amategeko n'Amabwiriza"}
+            {en ? "Terms of Service" : "Amategeko y'Imikoreshereze"}
           </h1>
           <section className="mb-6">
+            <p className="text-gray-600">
+              {en
+                ? "Welcome to Duhuze Group. By accessing or using our services, you agree to comply with these terms. Please read them carefully to understand your rights and obligations."
+                : "Murakaza neza muri Duhuze Group. Mukoresha serivisi zacu, mwemera gukurikiza aya mategeko. Muyasome neza kugira ngo mumenye uburenganzira n'inshingano zanyu."}
+            </p>
+          </section>
+
+          {/* Company Overview */}
+          <section className="mb-6">
             <h2 className="text-xl font-semibold mb-4 text-gray-800">
-              {en ? "About Hamwe Group" : "Ibyerekeye Hamwe Group"}
+              {en ? "About Duhuze Group" : "Ibyerekeye Duhuze Group"}
             </h2>
             <p className="text-gray-600 mb-4">
               {en
-                ? "Hamwe Group is a trusted real estate company, certified by the Rwanda Development Board (RDB), specializing in connecting property buyers and sellers. We facilitate transactions on your behalf, ensuring a seamless and transparent process."
-                : "Hamwe Group ni sosiyete yizewe mu bucuruzi bw'imitungo itimukanwa, ifite icyemezo cyemewe na RDB, ikaba igamije guhuza abashaka kugura no kugurisha imitungo. Tworohereza mu gihe cy'imikorere, tukizeza ko byose bigenda neza kandi mu mucyo."}
+                ? "Duhuze Group is a trusted real estate company, certified by the Rwanda Development Board (RDB), specializing in connecting property buyers and sellers."
+                : "Duhuze Group ni sosiyete yizewe mu bucuruzi bw'imitungo itimukanwa, ifite icyemezo cyemewe na RDB."}
             </p>
             <p className="text-gray-600 mb-4">
               {en
-                ? "Our team of experts in information technology and marketing ensures that your property gets maximum exposure. With professional photography and expert pricing advice, we help you attract more buyers and secure the best deals."
-                : "Itsinda ryacu ry'inzobere mu ikoranabuhanga no kwamamaza ryemeza ko umutungo wawe ugera ku bantu benshi. Dufite amafoto y'umwuga n'inama z'uburyo bwo gushyiraho ibiciro, tukagufasha kubona abaguzi benshi no kugera ku masezerano meza."}
+                ? "We provide professional services, including property marketing, pricing advice, and transaction facilitation, ensuring transparency and trust."
+                : "Dutanga serivisi z'umwuga zirimo kumenyekanisha imitungo, inama ku biciro, no gufasha mu micungire y'ubucuruzi, twizeza ko byose bigenda neza kandi mu mucyo."}
             </p>
           </section>
 
@@ -49,33 +58,33 @@ const TermsAndPolicies = () => {
             <ul className="list-disc ml-6 text-gray-600">
               <li className="mb-2">
                 {en
-                  ? "You must provide accurate and truthful information about your property."
-                  : "Ugomba gutanga amakuru nyayo kandi y'ukuri ku mutungo wawe."}
+                  ? "Provide accurate and truthful information about your property."
+                  : "Tanga amakuru nyayo kandi y'ukuri ku mutungo wawe."}
               </li>
               <li className="mb-2">
                 {en
-                  ? "Ownership verification documents must be submitted before listing."
-                  : "Ibimenyetso by'uburenganzira ku mutungo bigomba gushyikirizwa mbere yo gushyira ku rubuga."}
+                  ? "Submit all required ownership verification documents before listing."
+                  : "Shyikiriza ibimenyetso by'uburenganzira ku mutungo mbere yo gushyira ku rubuga."}
               </li>
               <li className="mb-2">
                 {en
-                  ? "You agree to allow Hamwe Group to market and display your property."
-                  : "Uremeza ko Hamwe Group imenyekanisha kandi igaragaza umutungo wawe."}
+                  ? "Ensure compliance with all applicable local laws and regulations."
+                  : "Witondere gukurikiza amategeko n'amabwiriza bihari."}
               </li>
             </ul>
           </section>
 
-          {/* Confidentiality and Data Privacy */}
+          {/* Data Privacy and Usage */}
           <section className="mb-6">
             <h2 className="text-xl font-semibold mb-4 text-gray-800">
               {en
                 ? "Confidentiality and Data Privacy"
                 : "Amabanga n'Umutekano w'Amakuru"}
             </h2>
-            <p className="text-gray-600">
+            <p className="text-gray-600 mb-4">
               {en
-                ? "Hamwe Group ensures that your personal and property information is stored securely and used only for the intended purposes."
-                : "Hamwe Group yemeza ko amakuru yawe bwite n'ay'umitungo abitswe mu buryo bwizewe kandi akoreshwa gusa ku mpamvu zateganyijwe."}
+                ? "We prioritize the security of your data. Information collected is used only for transaction purposes and will not be shared without consent."
+                : "Dushyira imbere umutekano w'amakuru yawe. Amakuru yakusanyijwe akoreshwa gusa ku mpamvu zijyanye n'ubucuruzi kandi ntazahabwa abandi utabyemeye."}
             </p>
           </section>
 
@@ -86,22 +95,22 @@ const TermsAndPolicies = () => {
                 ? "Fees and Payment Terms"
                 : "Amafaranga n'Amabwiriza yo Kwishyura"}
             </h2>
-            <p className="text-gray-600">
+            <p className="text-gray-600 mb-4">
               {en
-                ? "Our commission rates and fees are transparent and communicated upfront. Payments are non-refundable once services commence."
-                : "Ijanisha ryacu ry'amafaranga n'amafaranga asabwa birasobanutse kandi bitangazwa hakiri kare. Amafaranga yishyuwe ntasubizwa nyuma yo gutangira serivisi."}
+                ? "Our fees are transparent. Once services begin, payments are non-refundable unless otherwise stated."
+                : "Amafaranga yacu aragaragara kandi asobanutse. Iyo serivisi zitangiye, amafaranga yishyuwe ntasubizwa keretse bibaye ngombwa."}
             </p>
           </section>
 
-          {/* Liability Disclaimer */}
+          {/* Conflict Resolution */}
           <section className="mb-6">
             <h2 className="text-xl font-semibold mb-4 text-gray-800">
-              {en ? "Liability Disclaimer" : "Guhakana Inshingano"}
+              {en ? "Conflict Resolution" : "Gukemura Amakimbirane"}
             </h2>
-            <p className="text-gray-600">
+            <p className="text-gray-600 mb-4">
               {en
-                ? "Hamwe Group is not responsible for disputes between buyers and sellers. While we provide guidance and facilitate transactions, the final decision rests with the parties involved."
-                : "Hamwe Group ntishinzwe amakimbirane hagati y'abaguzi n'abagurisha. Nubwo dutanga inama kandi tukorohereza imicungire, icyemezo cya nyuma kireba impande zombi."}
+                ? "Duhuze Group mediates disputes between parties when necessary but is not liable for unresolved issues."
+                : "Duhuze Group ifasha mu gukemura amakimbirane hagati y'impande iyo bibaye ngombwa, ariko ntibazwa ibibazo bitakemutse."}
             </p>
           </section>
 
@@ -112,20 +121,20 @@ const TermsAndPolicies = () => {
             </h2>
             <p className="text-gray-600">
               {en
-                ? "All transactions and agreements are governed by the laws of Rwanda."
-                : "Ibikorwa byose n'amasezerano bigengwa n'amategeko y'u Rwanda."}
+                ? "All activities are governed by Rwandan law."
+                : "Ibikorwa byose bigengwa n'amategeko y'u Rwanda."}
             </p>
           </section>
 
           {/* Updates to Policies */}
           <section>
             <h2 className="text-xl font-semibold mb-4 text-gray-800">
-              {en ? "Updates to Policies" : "Guhindura Amabwiriza"}
+              {en ? "Policy Updates" : "Guhindura Amabwiriza"}
             </h2>
             <p className="text-gray-600">
               {en
-                ? "Hamwe Group reserves the right to update these terms and policies at any time. Clients are encouraged to review this page regularly."
-                : "Hamwe Group ifite uburenganzira bwo guhindura aya mabwiriza igihe icyo ari cyo cyose. Abakiriya barashishikarizwa kugenzura uru rupapuro buri gihe."}
+                ? "We reserve the right to amend these terms at any time. Please check regularly for updates."
+                : "Twifitiye uburenganzira bwo guhindura aya mabwiriza igihe icyo ari cyo cyose. Mujye mugenzura kenshi ibyavuguruwe."}
             </p>
           </section>
         </div>
@@ -134,4 +143,4 @@ const TermsAndPolicies = () => {
   );
 };
 
-export default TermsAndPolicies;
+export default TermsOfService;

@@ -45,6 +45,9 @@ const AppContextProvider = ({ children }) => {
     const timer = setTimeout(() => {
       setScreenLoad(false);
     }, 500);
+    stopRef.current = false;
+    pageRef.current = 0;
+    fetchData();
     return () => {
       clearTimeout(timer);
     };
@@ -116,35 +119,20 @@ const AppContextProvider = ({ children }) => {
     pageRef.current = page + 1;
   }, [page]);
 
-  useEffect(() => {
-    const observerCallback = (entries) => {
-      const [entry] = entries;
-
-      if (entry.isIntersecting && !stop && datachoice === currentDataName) {
-        console.log("normal call");
-        setLoadingResults(true);
-        fetchData();
-      } else if (datachoice !== currentDataName) {
-        pageRef.current = 1;
-        setPage(0);
-        setStop(false);
-        console.log("new fetch");
-        setLoadingResults(true);
-        fetchData();
-      }
-    };
-
-    const observer = new IntersectionObserver(observerCallback, {
-      root: null,
-      threshold: 0.1,
-    });
-
-    if (bottomRef.current) observer.observe(bottomRef.current);
-
-    return () => {
-      if (bottomRef.current) observer.unobserve(bottomRef.current);
-    };
-  }, [stop, datachoice, currentDataName]);
+  const handleLoadMore = () => {
+    if (!stop && datachoice === currentDataName) {
+      console.log("normal call");
+      setLoadingResults(true);
+      fetchData();
+    } else if (datachoice !== currentDataName) {
+      pageRef.current = 1;
+      setPage(0);
+      setStop(false);
+      console.log("new fetch");
+      setLoadingResults(true);
+      fetchData();
+    }
+  };
 
   const filterRef = useRef(dataFilter);
   useEffect(() => {
@@ -231,6 +219,7 @@ const AppContextProvider = ({ children }) => {
         data,
         error,
         bottomRef,
+        handleLoadMore,
         datachoice,
         setDataChoice,
         setDataFilter,

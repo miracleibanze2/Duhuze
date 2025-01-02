@@ -15,6 +15,8 @@ import checkSvg from "./svgs/check.svg";
 import ArrowSvg from "./svgs/arrow-left.svg";
 import HeartfillSvg from "./svgs/heart-fill.svg";
 import HeartstrokeSvg from "./svgs/heart-stroke.svg";
+import angleDownWhiteSvg from "./svgs/angle-down-white.svg";
+import globeWhiteSvg from "./svgs/globe2-white.svg";
 
 import notFound from "./images/404.png";
 import somethingWrong from "./images/500.png";
@@ -25,6 +27,8 @@ export {
   namePhoto,
   globeSvg,
   angleDownSvg,
+  angleDownWhiteSvg,
+  globeWhiteSvg,
   handShake,
   land,
   house,

@@ -9,6 +9,7 @@ import {
   whatWeHaveCards,
 } from "./constants";
 import { useNavigate } from "react-router-dom";
+import Navbar from "./Navbar";
 
 const Welcome = () => {
   const { en } = useContext(AppContext);
@@ -100,13 +101,16 @@ const Welcome = () => {
   );
 
   return (
-    <div className="w-full relative flex flex-col items-center">
+    <div className="w-full relative flex flex-col items-center -mt-[3.5rem]">
       {/* Hero Section */}
       <header
         id="welcome"
-        className="w-full lg:aspect-video md:aspect-[12/9] aspect-[4/3] relative bg-blue-400"
+        className="w-full lg:aspect-video md:aspect-[12/9] aspect-[4/3] relative container z-[1000]"
       >
-        <div className="welcome z-[40] absolute inset-0 bg-[#010435b2] pt-5 flex-top-center">
+        <div className="absolute inset-0">
+          <Navbar welcome />
+        </div>
+        <div className="welcome z-[40] absolute inset-0 bg-[#010435b2] pt-[3.7rem] flex-top-center">
           <div className="flex-top-center z-[40] w-max rounded-b-full pb-2 px-10">
             <h1 className="md:h1 sm:h2 h3 font-semibold text-white">
               {en ? "Browse Verified Properties," : "Shakisha imitungo yemewe,"}
@@ -126,6 +130,26 @@ const Welcome = () => {
                 ? "We will guide you every step of the way"
                 : "Tugufashe muri buri nzira."}
             </p>
+            <div className="flex flex-wrap py-4 gap-2 max-sm:absolute sm:w-max w-1/2 bottom-0 right-0 max-sm:justify-end pr-3">
+              <button
+                className="button border-white border rounded-full text-white py-2 px-4 hover:bg-white hover:font-bold hover:text-[#010435b2]"
+                onClick={() => navigate("/browse/houses")}
+              >
+                Houses
+              </button>
+              <button
+                className="button border-white border rounded-full text-white py-2 px-4 hover:bg-white hover:font-bold hover:text-[#010435b2]"
+                onClick={() => navigate("/browse/land")}
+              >
+                Land
+              </button>
+              <button
+                className="button border-white border rounded-full text-white py-2 px-4 hover:bg-white hover:font-bold hover:text-[#010435b2]"
+                onClick={() => navigate("/browse/electronics")}
+              >
+                Electronics
+              </button>
+            </div>
           </div>
         </div>
         <div className="w-full h-full overflow-hidden  -z-1">
@@ -137,9 +161,6 @@ const Welcome = () => {
             className="w-full h-full"
           />
         </div>
-        {/* <div className="absolute inset-0 h-full w-[10rem] bg-green-400">
-          jhvjh
-        </div> */}
       </header>
 
       {/* Main Content */}
@@ -149,7 +170,7 @@ const Welcome = () => {
           {welcomeParts.map((item, index) => (
             <div className="w-full flex-center-both" key={index}>
               <p
-                className="body-1 h-full font-normal flex-center-both cursor-pointer gap-2 w-[18rem] p-2"
+                className="body-1 h-full font-normal flex-center-both cursor-pointer gap-2 w-[18rem] py-1 px-2 hover:bg-zinc-200"
                 onClick={() => handleWelcomePart(index)}
               >
                 <span className="flex items-center gap-2 w-full">
@@ -165,7 +186,7 @@ const Welcome = () => {
                 item.list?.map((subItem, subIndex) => (
                   <a
                     key={subIndex}
-                    className="w-full text-sm font-normal leading-tight pl-12 hover:underline cursor-pointer"
+                    className="w-full text-sm font-normal hover:bg-zinc-200 px-2 py-1 pl-12 cursor-pointer"
                     onClick={() => {
                       if (subItem.link) {
                         navigate(`/browse/${subItem.link}`);
@@ -203,8 +224,8 @@ const Welcome = () => {
           </h3>
           <p className="text-sm leading-tight text-zinc-800 mb-12">
             {en
-              ? "Learn how to use Hamwe platform to get the best services and find your dream property with ease."
-              : "Menya uko wakoresha urubuga rwa Hamwe kugira ngo ubone serivisi nziza kandi ushake icumbi wifuza byoroshye."}
+              ? "Learn how to use Duhuze platform to get the best services and find your dream property with ease."
+              : "Menya uko wakoresha urubuga rwa Duhuze kugira ngo ubone serivisi nziza kandi ushake icumbi wifuza byoroshye."}
           </p>
 
           {renderSteps(
@@ -263,7 +284,7 @@ const Welcome = () => {
               </span>
               {en
                 ? "Sign a service agreement with us to proceed with listing and selling your property."
-                : "Sinyisha amasezerano y'ibikorwa hamwe natwe kugirango dukomeze gutangaza no kugurisha umutungo wawe."}
+                : "Sinyisha amasezerano y'ibikorwa Duhuze natwe kugirango dukomeze gutangaza no kugurisha umutungo wawe."}
             </li>
             <li className="mb-4">
               <span className="font-semibold">

@@ -1,16 +1,19 @@
 import { useContext, useEffect, useState } from "react";
 import {
   angleDownSvg,
+  angleDownWhiteSvg,
   checkSvg,
   globeSvg,
+  globeWhiteSvg,
   handShake,
   nameLogo,
+  namePhoto,
 } from "../assets";
 import { AppContext } from "./AppContext";
 import MenuSvg from "../assets/svgs/MenuSvg";
 import { useLocation, useNavigate } from "react-router-dom";
 
-const Navbar = () => {
+const Navbar = ({ welcome }) => {
   const navigate = useNavigate();
   const context = useContext(AppContext);
   const { pathname } = useLocation();
@@ -27,16 +30,33 @@ const Navbar = () => {
   useEffect(() => setMenu(false), [pathname]);
 
   return (
-    <div className="flex w-full sticky top-0 justify-center bg-white h-[3.5rem] shadow-md z-[999]">
+    <div
+      className={`flex w-full sticky top-0 justify-center h-[3.5rem] shadow-md ${
+        welcome
+          ? "z-[1000] bg-transparent backdrop-blur-2xl"
+          : " z-[999] bg-white"
+      }`}
+    >
       <div className="flex-between-hor px-4 container">
-        <img
-          src={nameLogo}
-          alt="logoName"
-          height={300}
-          width={1100}
-          className="h-10 w-auto"
-          onClick={() => navigate("/")}
-        />
+        {welcome ? (
+          <img
+            src={namePhoto}
+            alt="logoName"
+            height={300}
+            width={1100}
+            className="w-32 rounded-t-2xl top-0 h-12 object-cover object-bottom"
+            onClick={() => navigate("/")}
+          />
+        ) : (
+          <img
+            src={nameLogo}
+            alt="logoName"
+            height={300}
+            width={1100}
+            className="h-10 w-auto"
+            onClick={() => navigate("/")}
+          />
+        )}
         <div
           className={`md:flex-center-hor gap-3 ${
             menu
@@ -46,20 +66,29 @@ const Navbar = () => {
         >
           <label
             htmlFor="language" // Links the label to the select
-            className="md:border border-blue-400 p-2 relative md:h-10 flex items-center md:flex-row flex-col h-max hover:bg-zinc-200 w-full"
+            className="md:border border-blue-400 p-2 relative md:h-10 flex items-center md:flex-row flex-col h-max w-full"
           >
             <span
               className="md:flex-center-hor flex-between-hor max-md:w-full gap-2"
               onClick={() => setChooseLang(!chooseLang)}
             >
-              <span className="flex-center-hor gap-2">
-                <img src={globeSvg} alt="globe" className="w-5 aspect-square" />
+              <span
+                className={`flex-center-hor gap-2 ${welcome && "text-white"}`}
+              >
+                <img
+                  src={!welcome ? globeSvg : globeWhiteSvg}
+                  alt="globe"
+                  className="w-5 aspect-square"
+                />
                 {en ? "Choose language" : "Hitamo ururimi"}
               </span>
-              <img src={angleDownSvg} className="w-4 h-4" />
+              <img
+                src={!welcome ? angleDownSvg : angleDownWhiteSvg}
+                className="w-4 h-4"
+              />
             </span>
             {chooseLang && (
-              <div className="absolute right-0 left-0 top-full flex-center-both z-[50] translate-y-1 px-2 py-4 bg-white list">
+              <div className="text-zinc-100 absolute right-0 left-0 top-full flex-center-both z-[50] translate-y-1 px-2 py-4 bg-white list">
                 <span
                   onClick={() => handleLanguage("true")}
                   className={`${en && "bg-blue-200"}`}

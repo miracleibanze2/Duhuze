@@ -21,14 +21,8 @@ body {
 @layer components {
   header#welcome::after {
     content: "";
-    position: absolute;
-    bottom: 0;
-    left: 0;
-    width: 50%;
-    transform: skewX(50deg) translate(-5rem, 0.5rem);
-    height: 5rem;
-    z-index: 100;
-    background-color: #f4f4f5;
+    transform: skewX(50deg) translate(-3rem, 0.5rem);
+    @apply bg-[#f4f4f5] z-[100] lg:h-[5rem] md:h-[4rem] h-[3rem] w-1/2 absolute left-0 bottom-0;
   }
 
   .img.welcome::after {
@@ -37,7 +31,7 @@ body {
     bottom: 0;
     left: 0;
     width: 50%;
-    transform: skewX(50deg) translateX(-1.5rem);
+    transform: skewX(50deg) translate(-1.5rem, 0.5rem);
     height: 2rem;
     z-index: 10000;
     background-color: white;
@@ -48,7 +42,7 @@ body {
     top: 0;
     right: 0;
     width: 50%;
-    transform: skewX(50deg) translateX(1.5rem);
+    transform: skewX(50deg) translate(1.5rem, -0.5rem);
     height: 2rem;
     z-index: 10000;
     background-color: white;
@@ -224,7 +218,7 @@ body {
 
   ol li {
     list-style: decimal;
-    list-style-position: inside;
+    list-style-position: side;
     font-size: 20px;
   }
   @keyframes fadeIn {

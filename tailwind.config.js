@@ -9,7 +9,8 @@ export default {
       addBase({});
       addComponents({
         ".container": {
-          "@apply max-w-[77.5rem] xl:max-w-[87.5rem]": {},
+          "@apply md:max-w-[77.5rem] xl:max-w-[87.5rem] max-w-full max-sm:min-w-full":
+            {},
         },
         ".h1": {
           "@apply font-semibold text-[2.5rem] leading-[3.25rem] md:text-[2.75rem] md:leading-[3.75rem] lg:text-[3.25rem] lg:leading-[4.0625rem] xl:text-[3.75rem] xl:leading-[4.5rem]":
@@ -46,7 +47,7 @@ export default {
           "@apply font-light text-xs tracking-tight uppercase": {},
         },
         ".button": {
-          "@apply text-xs font-bold text-[0.875rem] leading-6 md:text-base font-semibold tracking-wider":
+          "@apply text-xs font-bold text-[0.875rem] focus:ring-blue-200 leading-6 md:text-base font-semibold tracking-wider":
             {},
         },
         ".input": {

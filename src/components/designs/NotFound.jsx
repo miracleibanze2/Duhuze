@@ -2,9 +2,12 @@ import { useNavigate } from "react-router-dom";
 import { notFound, somethingWrong } from "../../assets";
 import { AppContext } from "../AppContext";
 import { useContext } from "react";
+import Loader from "../Loader";
 
 const NotFound = ({ context }) => {
-  const { en } = useContext(AppContext);
+  const contextState = useContext(AppContext);
+  if (!contextState) return <Loader />;
+  const { en } = contextState;
   const navigate = useNavigate();
   const renderContent = () => {
     if (context) {

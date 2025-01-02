@@ -205,7 +205,7 @@ const ListProperty = () => {
 
           <form onSubmit={handleSubmit}>
             <div className="mb-4">
-              <label className="block text-gray-600 mb-2">
+              <label className="block mb-2">
                 {en ? "Full Name" : "Amazina Yuzuye"}
               </label>
               <input
@@ -352,7 +352,10 @@ const ListProperty = () => {
                   className="mr-2"
                 />
                 {en ? "I agree to the" : "Nemera"}
-                <a href="/list/terms&policies" className="text-blue-600 ml-1">
+                <a
+                  href="/list/terms&policies"
+                  className="text-blue-600 hover:text-blue-700 visited:text-blue-500 underline ml-1"
+                >
                   {en ? "terms and policies" : "amategeko n'amabwiriza"}
                 </a>
               </label>

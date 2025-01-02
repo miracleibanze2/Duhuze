@@ -58,22 +58,23 @@ export const PropertyCard = ({ property, onViewDetails }) => {
           {likes || 0}&nbsp;{en && "likes"}
         </p>
 
-        <div className="flex justify-between items-center mt-4 border-y">
-          <div className="border-r pt-2">
+        <div className="mt-4 border-y grid grid-cols-7">
+          <div className="border-r pt-2 col-span-3">
             <p className="text-sm font-medium text-gray-600 border-b pr-2">
-              {en ? "Price" : "Igiciro"}
+              {en ? "Price" : "Igiciro"}&nbsp;(
+              <i className="font-light px-1 ">Rwf</i>)
             </p>
             <p className="text-lg font-bold text-gray-900 pr-2">
-              {price?.toLocaleString()} Rwf
+              {price?.toLocaleString()}
             </p>
           </div>
-          <div className="border-r pt-2 flex-1">
+          <div className="border-r pt-2 flex-1 col-span-2">
             <p className="text-sm font-medium text-gray-600 px-2 border-b">
               {en ? "Area" : "Ubugari"}
             </p>
             <p className="text-lg font-bold text-gray-900 px-2">{area} m²</p>
           </div>
-          <div className="pt-2">
+          <div className="pt-2 col-span-2">
             <p className="text-sm font-medium text-gray-600 border-b pl-2">
               {en ? "Bedrooms" : "Ibyumba"}
             </p>
@@ -95,13 +96,28 @@ export const PropertyCard = ({ property, onViewDetails }) => {
 const BrowseContent = () => {
   const context = useContext(AppContext);
   if (!context) return <Loader />;
-  const { en, loadingResults, stop, data, error, bottomRef } = context;
+  const {
+    en,
+    loadingResults,
+    stop,
+    data,
+    error,
+    setLoadingResults,
+    fetchData,
+    datachoice,
+    currentDataName,
+    pageRef,
+    setPage,
+    setStop,
+    handleLoadMore,
+  } = context;
   const navigate = useNavigate();
   const { pathname } = useLocation();
 
   useEffect(() => {
     console.log(data);
   }, [data]);
+
   return (
     <div className="w-full p-2 flex flex-col relative h-full">
       {data.length === 0 && loadingResults && <BrowseSkeleton />}
@@ -135,11 +151,15 @@ const BrowseContent = () => {
           {en ? "No more houses to load" : "Nta bindi bibonetse"}
         </div>
       )}
-      <div
-        ref={bottomRef}
-        className="bottom-trigger"
-        style={{ height: "1px" }}
-      ></div>
+
+      {!stop && (
+        <button
+          onClick={handleLoadMore}
+          className="button mt-4 w-full py-2 px-4 bg-blue-600 text-white shadow-md hover:bg-blue-700 focus:outline-none focus:ring transition-colors duration-300 max-w-md mx-auto"
+        >
+          {en ? "Load More" : "Reba Ibindi"}
+        </button>
+      )}
     </div>
   );
 };

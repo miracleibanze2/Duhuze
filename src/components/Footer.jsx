@@ -4,14 +4,16 @@ import { AppContext } from "./AppContext";
 import Loader from "./Loader";
 
 export const Reserved = () => {
-  const { en } = useContext(AppContext);
+  const context = useContext(AppContext);
+  if (!context) return <Loader />;
+  const { en } = context;
   return (
     <div className="mt-8 border-t border-gray-700 pt-4 text-center w-full container">
       <p>
         &copy; 2024{" "}
         {en
-          ? "Hamwe. All Rights Reserved."
-          : "Hamwe. Uburenganzira Bwose Burabitswe."}
+          ? "Huhuze. All Rights Reserved."
+          : "Huhuze. Uburenganzira Bwose Burabitswe."}
       </p>
     </div>
   );
