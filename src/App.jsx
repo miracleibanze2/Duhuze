@@ -29,7 +29,7 @@ const App = () => {
       <Navbar />
       <Notice />
       {screenLoad && !loading && <Loader screen />}
-      <div className="w-full flex-1 relative h-full">
+      <div className="w-full flex-1 relative h-full min-h-[70vh]">
         {loading && !screenLoad && <Loader />}
         <Suspense fallback={<Loader />}>
           <Routes>

@@ -28,7 +28,7 @@ export const Skeleton = () => {
 
 const Loader = ({ screen }) => {
   return (
-    <div className="fixed inset-0 z-[100] bg-zinc-100 flex flex-col py-4 items-center">
+    <div className="fixed inset-0 z-[1000] bg-zinc-100 flex flex-col py-4 items-center">
       <Skeleton />
       {screen && <Reserved />}
     </div>
