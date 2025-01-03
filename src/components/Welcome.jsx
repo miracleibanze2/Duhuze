@@ -56,7 +56,7 @@ const Welcome = () => {
   const renderSectionItems = (items) =>
     items.map((item, index) => (
       <div
-        className="w-[18rem] min-h-[20rem] bg-zinc-300 flex-center-both corner relative border p-3 border-black"
+        className="w-[18rem] min-h-[20rem] bg-zinc-200 flex-center-both rounded-md corner relative border p-3 pb-6 border-black shadow-2xl hover:scale-105 duration-500 hover:-skew-y-2"
         key={index}
       >
         <img
@@ -132,19 +132,19 @@ const Welcome = () => {
             </p>
             <div className="flex flex-wrap py-4 gap-2 max-sm:absolute sm:w-max w-1/2 bottom-0 right-0 max-sm:justify-end pr-3">
               <button
-                className="button border-white border rounded-full text-white py-2 px-4 hover:bg-white hover:font-bold hover:text-[#010435b2]"
+                className="button border-white border rounded-full text-white py-2 px-4 hover:bg-white hover:font-bold hover:text-[#010435b2] duration-500"
                 onClick={() => navigate("/browse/houses")}
               >
                 Houses
               </button>
               <button
-                className="button border-white border rounded-full text-white py-2 px-4 hover:bg-white hover:font-bold hover:text-[#010435b2]"
+                className="button border-white border rounded-full text-white py-2 px-4 hover:bg-white hover:font-bold hover:text-[#010435b2] duration-500"
                 onClick={() => navigate("/browse/land")}
               >
                 Land
               </button>
               <button
-                className="button border-white border rounded-full text-white py-2 px-4 hover:bg-white hover:font-bold hover:text-[#010435b2]"
+                className="button border-white border rounded-full text-white py-2 px-4 hover:bg-white hover:font-bold hover:text-[#010435b2] duration-500"
                 onClick={() => navigate("/browse/electronics")}
               >
                 Electronics

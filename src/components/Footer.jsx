@@ -10,10 +10,8 @@ export const Reserved = () => {
   return (
     <div className="mt-8 border-t border-gray-700 pt-4 text-center w-full container">
       <p>
-        &copy; 2024{" "}
-        {en
-          ? "Huhuze. All Rights Reserved."
-          : "Huhuze. Uburenganzira Bwose Burabitswe."}
+        &copy; {new Date().getFullYear()}&nbsp;Duhuze Real Estate.{" "}
+        {en ? "All Rights Reserved." : "Uburenganzira Bwose Burabitswe."}
       </p>
     </div>
   );
@@ -62,16 +60,16 @@ const Footer = () => {
               : "Imeyili: miracleibanze@gmail.com"}
           </p>
           <div className="flex space-x-4 mt-4">
-            <a href="#" className="text-blue-400 hover:text-blue-600">
+            <a href="#" className="!text-blue-500">
               Facebook
             </a>
-            <a href="#" className="text-blue-400 hover:text-blue-600">
+            <a href="#" className="!text-blue-500">
               Instagram
             </a>
-            <a href="#" className="text-blue-400 hover:text-blue-600">
+            <a href="#" className="!text-blue-500">
               Twitter
             </a>
-            <a href="#" className="text-blue-400 hover:text-blue-600">
+            <a href="#" className="!text-blue-500">
               LinkedIn
             </a>
           </div>
