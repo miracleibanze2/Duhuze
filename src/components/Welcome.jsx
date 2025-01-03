@@ -130,7 +130,7 @@ const Welcome = () => {
                 ? "We will guide you every step of the way"
                 : "Tugufashe muri buri nzira."}
             </p>
-            <div className="flex flex-wrap py-4 gap-2 max-sm:absolute sm:w-max w-1/2 bottom-0 right-0 max-sm:justify-end pr-3">
+            <div className="flex flex-wrap py-4 gap-2 w-max">
               <button
                 className="button border-white border rounded-full text-white py-2 px-4 hover:bg-white hover:font-bold hover:text-[#010435b2] duration-500"
                 onClick={() => navigate("/browse/houses")}
