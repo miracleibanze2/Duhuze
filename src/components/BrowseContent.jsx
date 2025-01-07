@@ -152,7 +152,7 @@ const BrowseContent = () => {
         </div>
       )}
 
-      {!stop && data.length > 0 && (
+      {!stop && data.length > 0 && !loadingResults && (
         <button
           onClick={handleLoadMore}
           className="button mt-4 w-full py-2 px-4 bg-blue-600 text-white shadow-md hover:bg-blue-700 focus:outline-none focus:ring transition-colors duration-300 max-w-md mx-auto"
