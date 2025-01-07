@@ -132,19 +132,19 @@ const Welcome = () => {
             </p>
             <div className="flex flex-wrap py-4 gap-2 w-max">
               <button
-                className="button border-white border rounded-full text-white py-2 px-4 hover:bg-white hover:font-bold hover:text-[#010435b2] duration-500"
+                className="button border-white border rounded-full text-white md:py-2 py-0 md:px-4 px-3 hover:bg-white hover:font-bold hover:text-[#010435b2] duration-500"
                 onClick={() => navigate("/browse/houses")}
               >
                 Houses
               </button>
               <button
-                className="button border-white border rounded-full text-white py-2 px-4 hover:bg-white hover:font-bold hover:text-[#010435b2] duration-500"
+                className="button border-white border rounded-full text-white md:py-2 py-0 md:px-4 px-3 hover:bg-white hover:font-bold hover:text-[#010435b2] duration-500"
                 onClick={() => navigate("/browse/land")}
               >
                 Land
               </button>
               <button
-                className="button border-white border rounded-full text-white py-2 px-4 hover:bg-white hover:font-bold hover:text-[#010435b2] duration-500"
+                className="button border-white border rounded-full text-white md:py-2 py-0 md:px-4 px-3 hover:bg-white hover:font-bold hover:text-[#010435b2] duration-500"
                 onClick={() => navigate("/browse/electronics")}
               >
                 Electronics

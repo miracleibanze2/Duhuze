@@ -143,7 +143,9 @@ const Navbar = ({ welcome }) => {
         <MenuSvg
           openNavigation={menu}
           onClick={() => setMenu(!menu)}
-          className="md:hidden"
+          className={`md:hidden ${
+            welcome && "bg-zinc-100 p-3 h-10 w-10 rounded-md"
+          }`}
         />
       </div>
     </div>
